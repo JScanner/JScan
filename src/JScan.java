@@ -11,10 +11,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class JoeyScan {
+public class JScan {
     private static final String LAN_PREFIX = "192.168.";
     private static final int THREADS = 200;
-
     private static JTextArea textArea;
     private static JButton startButton;
     private static JButton stopButton;
@@ -23,57 +22,39 @@ public class JoeyScan {
     private static AtomicBoolean isScanning;
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> createAndShowGUI());
+        SwingUtilities.invokeLater(JScan::createAndShowGUI);
     }
 
     private static void createAndShowGUI() {
-        // Create the main frame
-        JFrame frame = new JFrame("JoeyScan");
-
-        // Load the icon image (replace "path/to/your/icon/image.png" with the actual path)
-        ImageIcon icon = new ImageIcon("./JoeyScan.png");
-        frame.setIconImage(icon.getImage()); // Set the icon image
-
+        JFrame frame = new JFrame("JScan - 1.2.6");
+        ImageIcon icon = new ImageIcon(JScan.class.getResource("/JScan.png"));
+        frame.setIconImage(icon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // Create the start button
         startButton = new JButton("Start Scan");
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startScan();
-            }
-        });
+        startButton.addActionListener(e -> startScan());
         frame.add(startButton, BorderLayout.NORTH);
 
-        // Create the text area
         textArea = new JTextArea(20, 50);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Create the stop button
         stopButton = new JButton("Stop Scan");
         stopButton.setEnabled(false);
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stopScan();
-            }
-        });
+        stopButton.addActionListener(e -> stopScan());
         frame.add(stopButton, BorderLayout.SOUTH);
 
-        // Set frame size
         frame.pack();
-        frame.setSize(400, 600); // Adjust the size as needed
+        frame.setSize(400, 600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        // Initialize variables
         isScanning = new AtomicBoolean(false);
+
         try {
-            logWriter = new PrintWriter(new FileWriter("JoeyScanLOG.txt"));
+            logWriter = new PrintWriter(new FileWriter("suckmytoes.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,8 +65,6 @@ public class JoeyScan {
             return;
         }
         isScanning.set(true);
-
-        // Disable the button to prevent multiple scans
         startButton.setEnabled(false);
         stopButton.setEnabled(true);
 
@@ -93,9 +72,7 @@ public class JoeyScan {
         for (int i = 0; i < 65535; i++) {
             portsToScan[i] = i + 1;
         }
-
         executorService = Executors.newFixedThreadPool(THREADS);
-
         for (int i = 0; i < 256; i++) {
             final int subnet = i;
             executorService.submit(() -> scanIPSubnet(subnet, portsToScan));
@@ -119,11 +96,11 @@ public class JoeyScan {
     private static void scanPort(String ip, int port) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(ip, port), 100);
-            updateTextArea("[JoeyScan] Port " + port + " is open on IP " + ip);
-            logWriter.println("[JoeyScan] Port " + port + " is open on IP " + ip);
+            updateTextArea("Port " + port + " is open on IP " + ip);
+            logWriter.println("Port " + port + " is open on IP " + ip);
         } catch (IOException e) {
-            updateTextArea("[JoeyScan] Port " + port + " is closed on IP " + ip);
-            logWriter.println("[JoeyScan] Port " + port + " is closed on IP " + ip);
+            updateTextArea("Port " + port + " is closed on IP " + ip);
+            logWriter.println("Port " + port + " is closed on IP " + ip);
         }
     }
 
@@ -132,11 +109,8 @@ public class JoeyScan {
             return;
         }
         isScanning.set(false);
-
-        // Enable the button after stopping the scan
         startButton.setEnabled(true);
         stopButton.setEnabled(false);
-
         if (executorService != null) {
             executorService.shutdownNow();
         }
