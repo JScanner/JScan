@@ -1,9 +1,13 @@
-# JScan
-LAN Scanner, originally made so tht i dont have to find roku ip every time i want to use it(personal roku app since my roku app wont work on my phone)
-# JScan
-<br>![image](https://cometbot.info/files/userimages/nexus/img_45di9.gif)
-# How 2 use
-- ### Install IntelliJ IDEA<br>
-- ### Open as project<br>
-- ### src/JoeyScan > run<br>
-![image](https://github.com/lhwe/JoeyScan/assets/61995036/e45c6686-5bb8-4875-886b-026b6223567d)<br>![image](https://github.com/lhwe/JoeyScan/assets/61995036/c304c460-4142-4a19-a704-454649f1f421)
+# JScan: Network LAN Scanner
+JScan is a network LAN scanner made to save you from the torment of repeatedly hunting down your Roku device's IP address. This scanner was made out of sheer necessity – for my personal roku remote app, bc the normal roku app doesnt work on my device for some reason.
+# Installation and Usage
+
+## Instructions of use;
+```md
+    - Start JetBrains IntelliJ IDEA
+    - Open the project
+    - Go to `src/JScan.java` (OR LOOK AT RELEASES FOR PRE-BUILT VERSION)
+    - Click run
+    - OPTIONAL: Build with JavaC
+```
+![img_45di9](https://github.com/JScanner/JScan/assets/61995036/26c2abb2-375b-4954-98ed-9038a9b4edd8)
