@@ -14,4 +14,5 @@ JScan is a network LAN scanner made to save you from the torment of repeatedly h
 
     Download the JAR file from the release
 ```
+# ATTENTION: GITHUB HATES FILES OVER 25MB; ADD THIS TO ./javafx-sdk-20.0.2/bin (File = https://www.mediafire.com/file/56olnw9b8t768o5/jfxwebkit.dll/file)
 ![image](https://cometbot.info/static/userimages/nexus/10h4cf.gif)
