@@ -4,10 +4,14 @@ JScan is a network LAN scanner made to save you from the torment of repeatedly h
 
 ## Instructions of use;
 ```md
-    - Start JetBrains IntelliJ IDEA
+    - Start JetBrains IntelliJ IDEA (Or Visual Studio Code; NON-SUPPORTED)
     - Open the project
     - Go to `src/JScan.java` (OR LOOK AT RELEASES FOR PRE-BUILT VERSION)
     - Click run
     - OPTIONAL: Build with JavaC
+
+    OR:
+
+    Download the JAR file from the release
 ```
-![img_45di9](https://github.com/JScanner/JScan/assets/61995036/26c2abb2-375b-4954-98ed-9038a9b4edd8)
+![image](https://cometbot.info/static/userimages/nexus/10h4cf.gif)
